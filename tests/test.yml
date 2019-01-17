@@ -2,7 +2,7 @@
 - hosts: test
   tasks:
     apt:
-      name: gpg
+      name: gnupg
       state: present
   roles:
     - role: '../../.'
