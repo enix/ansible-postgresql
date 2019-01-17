@@ -43,13 +43,13 @@ script:
   - 'docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=true ansible-playbook -vvv --connection=local -i /etc/ansible/roles/role_under_test/tests/inventory /etc/ansible/roles/role_under_test/tests/test.yml'
 
   # Test Idempotence
-  - idempotence=$(mktemp)
-  - docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=true ansible-playbook -vvv --connection=local -i /etc/ansible/roles/role_under_test/tests/inventory /etc/ansible/roles/role_under_test/tests/test.yml | tee -a ${idempotence}
-  - >
-    tail ${idempotence}
-    | grep -q 'changed=0.*failed=0'
-    && (echo 'Idempotence test: pass' && exit 0)
-    || (echo 'Idempotence test: fail' && exit 1)
+  # - idempotence=$(mktemp)
+  # - docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=true ansible-playbook -vvv --connection=local -i /etc/ansible/roles/role_under_test/tests/inventory /etc/ansible/roles/role_under_test/tests/test.yml | tee -a ${idempotence}
+  # - >
+  #   tail ${idempotence}
+  #   | grep -q 'changed=0.*failed=0'
+  #   && (echo 'Idempotence test: pass' && exit 0)
+  #   || (echo 'Idempotence test: fail' && exit 1)
 
   # Run role test suite
 # Add your own tests depending on your $ROLE

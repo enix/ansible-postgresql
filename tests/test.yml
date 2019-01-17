@@ -9,8 +9,8 @@
       state: present
       update_cache: yes
 
-- include: test_stretch.yml
+- include_playbook: test_stretch.yml
   when: ansible_distribution_release == "stretch"
 
-- include: test_jessie.yml
+- include_playbook: test_jessie.yml
   when: ansible_distribution_release == "jessie"
