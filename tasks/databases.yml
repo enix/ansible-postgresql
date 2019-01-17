@@ -15,3 +15,15 @@
   # See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509
   vars:
     ansible_ssh_pipelining: true
+
+- name:
+  postgresql_ext:
+    db: "{{ item.name }}"
+    name: "{{ item.extension | default(omit) }}"
+  with_items: "{{ postgresql__databases }}"
+  when: item.extension is defined
+  become: true
+  become_user: "{{ postgresql__user }}"
+  # See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509
+  vars:
+    ansible_ssh_pipelining: true

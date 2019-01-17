@@ -30,3 +30,4 @@
         - {name: toto, password: "toto42", conn_limit: 2 }
       postgresql__databases:
         - {name: test, owner: toto }
+        - {name: acme, extension: postgis }
