@@ -21,3 +21,10 @@
   apt:
     name: "{{ postgresql__psycopg2 }}"
     state: present
+
+- name: "Debian: Install postgresql extensions"
+  apt:
+    name: "postgresql-{{ postgresql__version }}-{{ item }}"
+    state: present
+  notify: restart postgresql
+  with_items: "{{ postgresql__extensions }}"

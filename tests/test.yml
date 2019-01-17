@@ -9,6 +9,9 @@
 - hosts: test
   roles:
     - role: '../../.'
+      postgresql__extensions:
+        - postgis-2.5
+        - pgaudit
       postgresql__global_config_options:
         - option: listen_addresses
           value: '*'
