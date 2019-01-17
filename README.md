@@ -43,6 +43,18 @@ postgresql_hba_entries:
   - {type: host, database: replication, user: all, address: '127.0.0.1/32', auth_method: md5}
   - {type: host, database: replication, user: all, address: '::1/128', auth_method: md5}
 ```
+- `postgresql__databases` - state of databases to be installed on the server. only mandatory parameter is name:
+```
+postgresql__databases:
+  - {name: test,
+    lc_collate: 'en_US.UTF-8',
+    lc_ctype: 'en_US.UTF-8',
+    encoding: 'UTF-8',
+    template: 'template0',
+    owner: postgres,
+    state: 'present'
+   }
+```
 
 Dependencies
 ------------
