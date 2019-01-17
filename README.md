@@ -1,7 +1,7 @@
 enix.postgresql
 =================
 
-A role for deploying and configuring [postgresql](http://postgresql.com) and extensions on unix hosts using [Ansible](http://www.ansible.com/).
+A role for deploying and configuring [postgresql](http://www.postgresql.org) upstream release on unix hosts using [Ansible](http://www.ansible.com/).
 
 
 Requirements
@@ -9,51 +9,27 @@ Requirements
 
 Supported targets:
 
-- Ubuntu 14.04 "Trusty"
-- Ubuntu 16.04 "Xenial"
 - Debian 8 "Jessie"
 - Debian 9 "Stretch"
-- RedHat EL / CentOS 6
-- RedHat EL / CentOS 7
-- ...
 
 
 Role Variables
 --------------
 
-This roles comes preloaded with almost every available default. You can override each one in your hosts/group vars, in your inventory, or in your play. See the annotated defaults in `defaults/main.yml` for help in configuration. All provided variables start with `postgresql__`.
+This roles comes preloaded with almost every available default. You can override each one in your hosts/group vars, in your inventory, or in your play. See the annotated defaults in `defaults/main.yml` for help in configuration.
 
-- `postgresql__` - desc
+- `postgresql__version` - postgresql branch to install. defaults to 10. available: 9, 10, 11.
 
 Dependencies
 ------------
 
 - None
 
-Extra
------
-
-Available extensions (under a switch):
-
-- Extension - `postgresql_extension`
-- ...
-
-Callable tasks:
-
-- `task`: ...
-
-
 Usage
 -----
 
 Use Ansible galaxy requirements.yml
 
-    # postgresql from enix
-    # private role
-    - src: git+ssh://git@gitlab.enix.org/ansible/ansible-postgresql.git
-      name: enix.postgresql
-
-    # public role
     - src: enix.postgresql
 
 And add it to your play's roles:
@@ -88,4 +64,4 @@ GPLv2
 Author Information
 ------------------
 
-your name <your.name@enix.fr> - http://www.enix.io
+Laurent CORBES <laurent.corbes@enix.fr> - http://www.enix.io

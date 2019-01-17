@@ -1,6 +1,6 @@
 galaxy_info:
   role_name: postgresql
-  author: your name
+  author: Laurent CORBES
   description: Ansible role to deploy postgresql software
   company: Enix (http://www.enix.io)
   # If the issue tracker for your role is not on github, uncomment the
@@ -11,20 +11,7 @@ galaxy_info:
 
   min_ansible_version: 2.4
 
-  # Optionally specify the branch Galaxy will use when accessing the GitHub
-  # repo for this role. During role install, if no tags are available,
-  # Galaxy will use this branch. During import Galaxy will access files on
-  # this branch. If travis integration is cofigured, only notification for this
-  # branch will be accepted. Otherwise, in all cases, the repo's default branch
-  # (usually master) will be used.
-  #github_branch:
-
-  #
-  # Below are all platforms currently available. Just uncomment
-  # the ones that apply to your role. If you don't see your
-  # platform on this list, let us know and we'll get it added!
-  #
-  #platforms:
+  platforms:
   #- name: Fedora
   #  versions:
   #  - all
@@ -38,12 +25,12 @@ galaxy_info:
   #  - all
   #  - xenial
   #  - bionic
-  #- name: Debian
-  #  versions:
+  - name: Debian
+    versions:
   #  - all
   #  - sid
-  #  - jessie
-  #  - stretch
+    - jessie
+    - stretch
   #- name: EL
   #  versions:
   #  - all
@@ -53,16 +40,11 @@ galaxy_info:
   #  - all
   #  - Any
 
-  galaxy_tags: []
-    # List tags for your role here, one per line. A tag is
-    # a keyword that describes and categorizes the role.
-    # Users find roles by searching for tags. Be sure to
-    # remove the '[]' above if you add tags to this list.
-    #
-    # NOTE: A tag is limited to a single word comprised of
-    # alphanumeric characters. Maximum 20 tags per role.
+  galaxy_tags:
+    - postgresql
+    - database
+    - postgres
+    - rdbms
+    - replication
 
 dependencies: []
-  # List your role dependencies here, one per line.
-  # Be sure to remove the '[]' above if you add dependencies
-  # to this list.
