@@ -10,6 +10,13 @@
 
 - include_tasks: configure.yml
 
+- name: Ensure PostgreSQL is started and enabled on boot.
+  service:
+    name: postgresql
+    state: started
+    enabled: true
+
+
 - include_tasks: create_users.yml
 - include_tasks: databases.yml
 - include_tasks: grant_users.yml
