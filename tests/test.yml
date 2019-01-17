@@ -2,3 +2,13 @@
 - hosts: test
   roles:
     - role: '../../.'
+      postgresql__global_config_options:
+        - option: listen_addresses
+          value: '*'
+        - option: log_min_duration_statement
+          value: 1000
+        - option: bonjour
+          value: off
+          state: absent
+      postgresql__includeconf:
+        - perf.conf.j2

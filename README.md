@@ -19,6 +19,18 @@ Role Variables
 This roles comes preloaded with almost every available default. You can override each one in your hosts/group vars, in your inventory, or in your play. See the annotated defaults in `defaults/main.yml` for help in configuration.
 
 - `postgresql__version` - postgresql branch to install. defaults to 10. available: 9, 10, 11.
+- `postgresql__global_config_options` - global configuration options to set into postgresql.conf. common options are:
+```
+postgresql__global_config_options:
+  - option: listen_addresses
+    value: '*'
+  - option: log_min_duration_statement
+    value: 1000
+  - option: bonjour
+    value: off
+    state: absent
+```
+- `postgresql__includeconf` - list of configuration files to template and push into conf.d/.
 
 Dependencies
 ------------

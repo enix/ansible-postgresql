@@ -1,0 +1,53 @@
+---
+
+- name: Configure global settings
+  lineinfile:
+    dest: "{{ postgresql__config_path }}/postgresql.conf"
+    backrefs: yes
+    regexp: "^#?{{ item.option }}.+$"
+    line: "{{ item.option }} = '{{ item.value }}'"
+    state: "{{ item.state | default('present') }}"
+    backup: yes
+  with_items: "{{ postgresql__global_config_options }}"
+  notify: restart postgresql
+
+- name: Check include configuration
+  lineinfile:
+    dest: "{{ postgresql__config_path }}/postgresql.conf"
+    regexp: "^#?include_dir.+$"
+    line: "include_dir = 'conf.d'"
+    state: present
+    backup: yes
+  when: postgresql__includeconf is defined
+  notify: restart postgresql
+
+- name: Check include path exists
+  file:
+    dest: "{{ postgresql__config_path }}/conf.d"
+    state: directory
+    owner: "{{ postgresql__user }}"
+    group: "{{ postgresql__group }}"
+    mode: "0755"
+  when: postgresql__includeconf is defined
+
+- name: Template include configuration
+  template:
+    src: "{{ item }}"
+    dest: "{{ postgresql__config_path }}/conf.d/{{ item | basename | regex_replace('.j2','') }}"
+    backup: yes
+    owner: "{{ postgresql__user }}"
+    group: "{{ postgresql__group }}"
+    mode: 0644
+  with_items: "{{ postgresql__includeconf }}"
+  notify: restart postgresql
+
+
+# - name: Configure host based authentication (if entries are configured).
+#   template:
+#     src: "pg_hba.conf.j2"
+#     dest: "{{ postgresql_config_path }}/pg_hba.conf"
+#     owner: "{{ postgresql_user }}"
+#     group: "{{ postgresql_group }}"
+#     mode: 0600
+#   notify: restart postgresql
+#   when: postgresql_hba_entries
