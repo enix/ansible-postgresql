@@ -1,9 +1,12 @@
 ---
+
 - hosts: test
   tasks:
-    apt:
+  - apt:
       name: gnupg
       state: present
+
+- hosts: test
   roles:
     - role: '../../.'
       postgresql__global_config_options:

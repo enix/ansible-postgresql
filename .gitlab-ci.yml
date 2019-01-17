@@ -5,7 +5,6 @@ variables:
 
 .ansible_test_template: &ansible_test
   script:
-    - apt install gpg
     - ansible --version
 # Uncomment if your role have depends
 #    - ansible-galaxy install -v -r requirements.yml
