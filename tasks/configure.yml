@@ -39,6 +39,7 @@
     group: "{{ postgresql__group }}"
     mode: 0644
   with_items: "{{ postgresql__includeconf }}"
+  when: postgresql__includeconf is defined
   notify: restart postgresql
 
 
