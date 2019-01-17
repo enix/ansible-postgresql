@@ -1,2 +1,9 @@
 ---
 # vars file for postgresql
+
+postgresql__apt_repo: "deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main"
+postgresql__gpg_url: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+
+postgresql__data_dir: "/var/lib/postgresql/{{ postgresql__version }}/main"
+postgresql__bin_path: "/usr/lib/postgresql/{{ __postgresql_version }}/bin"
+postgresql__config_path: "/etc/postgresql/{{ postgresql__version }}/main"

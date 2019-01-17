@@ -1,10 +1,8 @@
 ---
 # handlers file for postgresql
 
-# - name: restart $service
-#   sudo: yes
-#   service: name=$service state=restarted
+- name: restart postgresql
+  service: name=postgresql state=restarted
 
-# - name: reload $service
-#   sudo: yes
-#   service: name=$service state=reloaded
+- name: reload postgresql
+  service: name=postgresql state=reloaded

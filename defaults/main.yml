@@ -1,4 +1,4 @@
 ---
 # defaults file for postgresql
 
-postgresql__version: "10"
+postgresql__version: 10
