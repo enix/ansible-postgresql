@@ -1,0 +1,26 @@
+---
+
+- hosts: test
+  roles:
+    - role: '../../.'
+      postgresql__extensions:
+        - postgis-2.5
+      postgresql__global_config_options:
+        - option: listen_addresses
+          value: '*'
+        - option: log_min_duration_statement
+          value: 1000
+        - option: bonjour
+          value: off
+          state: absent
+      postgresql__includeconf:
+        - perf.conf.j2
+      postgresql__hba_entries:
+        - {type: local, database: all, user: postgres, auth_method: peer}
+        - {type: local, database: all, user: all, auth_method: peer}
+        - {type: host, database: all, user: all, address: '0.0.0.0/0', auth_method: md5}
+      postgresql__users:
+        - {name: toto, password: "toto42", conn_limit: 2 }
+      postgresql__databases:
+        - {name: test, owner: toto }
+        - {name: acme, extension: postgis }
