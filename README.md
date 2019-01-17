@@ -31,6 +31,18 @@ postgresql__global_config_options:
     state: absent
 ```
 - `postgresql__includeconf` - list of configuration files to template and push into conf.d/.
+- `postgresql__hba_entries` - Host Based Authentification entries to configure. will override PostgreSQL default ones. Default is not defined. Mandatory fields are `type, database, user, auth_method`, optional are `address, ip_address, ip_mask, auth_options`. To replicate package provided configuration:
+```
+postgresql_hba_entries:
+  - {type: local, database: all, user: postgres, auth_method: peer}
+  - {type: local, database: all, user: all, auth_method: peer}
+  - {type: host, database: all, user: all, address: '127.0.0.1/32', auth_method: md5}
+  - {type: host, database: all, user: all, address: '::1/128', auth_method: md5}
+# starting version 10 there is replication role
+  - {type: local, database: replication, user: all, auth_method: peer}
+  - {type: host, database: replication, user: all, address: '127.0.0.1/32', auth_method: md5}
+  - {type: host, database: replication, user: all, address: '::1/128', auth_method: md5}
+```
 
 Dependencies
 ------------

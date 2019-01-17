@@ -19,3 +19,7 @@
           state: absent
       postgresql__includeconf:
         - perf.conf.j2
+      postgresql__hba_entries:
+        - {type: local, database: all, user: postgres, auth_method: peer}
+        - {type: local, database: all, user: all, auth_method: peer}
+        - {type: host, database: all, user: all, address: '0.0.0.0/0', auth_method: md5}
