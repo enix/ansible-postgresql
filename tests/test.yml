@@ -3,8 +3,11 @@
 - hosts: test
   tasks:
   - apt:
-      name: gnupg
+      name:
+        - gnupg
+        - locales
       state: present
+      update_cache: yes
 
 - include: test_stretch.yml
   when: ansible_distribution_release == "stretch"
