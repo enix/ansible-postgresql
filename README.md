@@ -49,7 +49,7 @@ postgresql_hba_entries:
 postgresql__users:
   - {name: "foobar",
     password: "supersecure",
-    encrypted: passwordinencryptedformat,
+    encrypted: yes,
     expires: 'infinity',
     state: 'present',
     conn_limit: none,

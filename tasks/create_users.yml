@@ -4,7 +4,7 @@
   postgresql_user:
     name: "{{ item.name }}"
     password: "{{ item.password | default(omit) }}"
-    encrypted: "{{ item.encrypted | default(omit) }}"
+    encrypted: "{{ item.encrypted | default(yes) }}"
     expires: "{{ item.expires | default('infinity') }}"
     state: "{{ item.state | default('present') }}"
   with_items: "{{ postgresql__users }}"
