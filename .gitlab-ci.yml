@@ -5,6 +5,7 @@ variables:
 
 .ansible_test_template: &ansible_test
   script:
+    - apt install gpg
     - ansible --version
 # Uncomment if your role have depends
 #    - ansible-galaxy install -v -r requirements.yml
@@ -37,6 +38,6 @@ debian-stretch:
 #   image: ansiblecheck/ansiblecheck:ubuntu-xenial
 #   <<: *ansible_test
 
-centos-7:
-  image: ansiblecheck/ansiblecheck:centos-7
-  <<: *ansible_test
+# centos-7:
+#   image: ansiblecheck/ansiblecheck:centos-7
+#   <<: *ansible_test

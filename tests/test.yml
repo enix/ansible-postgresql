@@ -1,5 +1,9 @@
 ---
 - hosts: test
+  tasks:
+    apt:
+      name: gpg
+      state: present
   roles:
     - role: '../../.'
       postgresql__global_config_options:
