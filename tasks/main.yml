@@ -10,4 +10,6 @@
 
 - include_tasks: configure.yml
 
+- include_tasks: create_users.yml
 - include_tasks: databases.yml
+- include_tasks: grant_users.yml

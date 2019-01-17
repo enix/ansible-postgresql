@@ -6,3 +6,4 @@ postgresql__global_config_options: []
 # postgresql__includeconf:
 # postgresql__hba_entries:
 postgresql__databases: []
+postgresql__users: []

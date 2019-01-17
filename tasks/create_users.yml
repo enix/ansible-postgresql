@@ -1,0 +1,16 @@
+---
+
+- name: Ensure PostgreSQL users are present
+  postgresql_user:
+    name: "{{ item.name }}"
+    password: "{{ item.password | default(omit) }}"
+    encrypted: "{{ item.encrypted | default(omit) }}"
+    expires: "{{ item.expires | default('infinity') }}"
+    state: "{{ item.state | default('present') }}"
+  with_items: "{{ postgresql__users }}"
+  # no_log: true
+  become: true
+  become_user: "{{ postgresql__user }}"
+  # See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509
+  vars:
+    ansible_ssh_pipelining: true

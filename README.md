@@ -43,6 +43,19 @@ postgresql_hba_entries:
   - {type: host, database: replication, user: all, address: '127.0.0.1/32', auth_method: md5}
   - {type: host, database: replication, user: all, address: '::1/128', auth_method: md5}
 ```
+- `postgresql__users` - Users to be crated on postgresql server and associated credentials:
+```
+postgresql__users:
+  - {name: "foobar",
+    password: "supersecure",
+    encrypted: passwordinencryptedformat,
+    expires: 'infinity',
+    state: 'present',
+    conn_limit: none,
+    priv: none,
+    role_attr_flags: none,
+    db: none
+```
 - `postgresql__databases` - state of databases to be installed on the server. only mandatory parameter is name:
 ```
 postgresql__databases:
