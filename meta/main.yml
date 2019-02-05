@@ -45,6 +45,5 @@ galaxy_info:
     - database
     - postgres
     - rdbms
-    - replication
 
 dependencies: []

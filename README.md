@@ -97,13 +97,14 @@ You can also use the role as a playbook. You will be asked which hosts to provis
 Still to do
 -----------
 
-- Write the role itself, for one
+- Check if we are deploying on a replica. In this case do no createdb, createuser
+- Add CI tests using molecule
 
 
 Changelog
 ---------
 
-### 0.1
+### 1.0.0
 
 Initial version.
 
