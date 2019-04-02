@@ -16,12 +16,14 @@
   vars:
     ansible_ssh_pipelining: true
 
-- name:
+- name: Setup PostgreSQL databases extension
   postgresql_ext:
-    db: "{{ item.name }}"
-    name: "{{ item.extension | default(omit) }}"
-  with_items: "{{ postgresql__databases }}"
-  when: item.extension is defined
+    db: "{{ item.0.name }}"
+    name: "{{ item.1 | default(omit) }}"
+  with_subelements:
+    - "{{ postgresql__databases }}"
+    - extension
+    - skip_missing: true
   become: true
   become_user: "{{ postgresql__user }}"
   # See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509

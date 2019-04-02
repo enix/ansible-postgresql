@@ -22,5 +22,6 @@
       postgresql__users:
         - {name: toto, password: "toto42", conn_limit: 2 }
       postgresql__databases:
-        - {name: test, owner: toto }
-        - {name: acme, extension: postgis }
+        - {name: testnull }
+        - {name: test, owner: toto, extension: ["hstore"] }
+        - {name: acme, extension: [ "postgis", "hstore"] }

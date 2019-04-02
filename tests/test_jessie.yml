@@ -15,4 +15,4 @@
       postgresql__users:
         - {name: toto, password: "toto42" }
       postgresql__databases:
-        - {name: test, owner: toto }
+        - {name: test, owner: toto, extension: ["hstore"] }

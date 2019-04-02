@@ -66,7 +66,7 @@ postgresql__databases:
     encoding: 'UTF-8',
     template: 'template0',
     owner: postgres,
-    extension: none, # check that you have installed then needed extension module before
+    extension: [], # check that you have installed then needed extension module before
     state: 'present'
    }
 ```
