@@ -104,6 +104,10 @@ Still to do
 Changelog
 ---------
 
+### 1.1.0
+
+Add support for an extension list in databases definition and configuration.
+
 ### 1.0.0
 
 Initial version.
