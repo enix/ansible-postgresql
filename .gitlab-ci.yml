@@ -36,6 +36,14 @@ debian-stretch:
   image: ansiblecheck/ansiblecheck:debian-stretch
   <<: *ansible_test
 
+debian-buster:
+  image: registry.gitlab.com/lcaflc/ansiblecheck:debian-buster
+  <<: *ansible_test
+
+debian-bullseye:
+  image: registry.gitlab.com/lcaflc/ansiblecheck:debian-bullseye
+  <<: *ansible_test
+
 # ubuntu-xenial:
 #   image: ansiblecheck/ansiblecheck:ubuntu-xenial
 #   <<: *ansible_test
