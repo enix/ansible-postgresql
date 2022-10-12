@@ -5,7 +5,7 @@
     - role: '../../.'
       postgresql__version: 14
       postgresql__extensions:
-        - postgis-2.5
+        - postgis-3
       postgresql__global_config_options:
         - option: listen_addresses
           value: '*'
