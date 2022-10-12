@@ -1,5 +1,6 @@
 galaxy_info:
   role_name: postgresql
+  namespace: enix
   author: Laurent CORBES
   description: Ansible role to deploy postgresql software
   company: Enix (http://www.enix.io)
