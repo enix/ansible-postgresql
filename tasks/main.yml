@@ -20,7 +20,7 @@
     name: postgresql
     state: started
     enabled: true
-  when: ansible_virtualization_type != "docker"
+  # when: ansible_virtualization_type != "docker"
 
 
 - include_tasks: create_users.yml
