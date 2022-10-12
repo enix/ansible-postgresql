@@ -3,7 +3,7 @@
 - hosts: test
   roles:
     - role: '../../.'
-      postgresql__version: 15
+      postgresql__version: 14
       postgresql__extensions:
         - postgis-3
       postgresql__global_config_options:
