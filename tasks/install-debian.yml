@@ -17,10 +17,17 @@
   notify:
     - restart postgresql
 
-- name: "Debian: Install python psycopg2"
+- name: "Debian: Install python-psycopg2"
   apt:
-    name: "{{ postgresql__psycopg2 }}"
+    name: "python-psycopg2"
     state: present
+  when: ansible_python.version.major == 2
+
+- name: "Debian: Install python3-psycopg2"
+  apt:
+    name: "python3-psycopg2"
+    state: present
+  when: ansible_python.version.major == 3
 
 - name: "Debian: Install postgresql extensions"
   apt:
