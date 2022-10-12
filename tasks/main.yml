@@ -3,7 +3,7 @@
 - name: "Checking PostgreSQL supported version"
   fail:
     msg: "Not a supported PostgreSQL version {{ postgresql__version }}"
-  when: ( postgresql__version < 9 ) or ( postgresql__version > 14 )
+  when: ( postgresql__version < 10 ) or ( postgresql__version > 14 )
 
 - name: Ensure all configured locales are present.
   locale_gen: "name={{ item }} state=present"
