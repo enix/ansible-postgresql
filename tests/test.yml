@@ -12,9 +12,6 @@
 - import_playbook: test_stretch.yml
   when: ansible_distribution_release == "stretch"
 
-- import_playbook: test_jessie.yml
-  when: ansible_distribution_release == "jessie"
-
 - import_playbook: test_buster.yml
   when: ansible_distribution_release == "buster"
 

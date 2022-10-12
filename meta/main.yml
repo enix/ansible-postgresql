@@ -29,8 +29,9 @@ galaxy_info:
     versions:
   #  - all
   #  - sid
-    - jessie
     - stretch
+    - buster
+    - bullseye
   #- name: EL
   #  versions:
   #  - all

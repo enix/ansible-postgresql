@@ -9,7 +9,6 @@ Requirements
 
 Supported targets:
 
-- Debian 8 "Jessie"
 - Debian 9 "Stretch"
 - Debian 10 "Buster"
 - Debian 11 "Bullseye"
