@@ -1,0 +1,40 @@
+---
+- name: Converge
+  hosts: all
+
+  tasks:
+  - apt:
+      name:
+        - gnupg
+        - locales
+      state: present
+      update_cache: yes
+
+- name: Converge
+  hosts: all
+
+  roles:
+    - role: "enix.postgresql"
+      postgresql__version: 14
+      postgresql__extensions:
+        - postgis-3
+      postgresql__global_config_options:
+        - option: listen_addresses
+          value: '*'
+        - option: log_min_duration_statement
+          value: 1000
+        - option: bonjour
+          value: off
+          state: absent
+      postgresql__includeconf:
+        - perf.conf.j2
+      postgresql__hba_entries:
+        - {type: local, database: all, user: postgres, auth_method: peer}
+        - {type: local, database: all, user: all, auth_method: peer}
+        - {type: host, database: all, user: all, address: '0.0.0.0/0', auth_method: md5}
+      postgresql__users:
+        - {name: toto, password: "toto42", conn_limit: 2 }
+      postgresql__databases:
+        - {name: testnull }
+        - {name: test, owner: toto, extension: ["hstore"] }
+        - {name: acme, extension: [ "postgis", "hstore"] }
