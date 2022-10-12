@@ -1,7 +1,7 @@
 ---
 # defaults file for postgresql
 
-postgresql__version: 10
+postgresql__version: 14
 postgresql__extensions: []
 postgresql__global_config_options: []
 # postgresql__includeconf:
