@@ -3,6 +3,8 @@
 
 - name: restart postgresql
   service: name=postgresql state=restarted
+  when: ansible_virtualization_type != "docker"
 
 - name: reload postgresql
   service: name=postgresql state=reloaded
+  when: ansible_virtualization_type != "docker"
