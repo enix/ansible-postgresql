@@ -1,4 +1,6 @@
 variables:
+  GITHUB_REPO: $CI_PROJECT_NAME
+  GITHUB_GROUP: enix
   ANSIBLE_INVENTORY: "tests/inventory"
   PYTHONUNBUFFERED: "1"
   ANSIBLE_FORCE_COLOR: "true"
@@ -47,3 +49,16 @@ debian-bullseye:
 # ubuntu-xenial:
 #   image: ansiblecheck/ansiblecheck:ubuntu-xenial
 #   <<: *ansible_test
+
+importgalaxy:
+  stage: deploy
+  image: registry.gitlab.com/lcaflc/ansiblecheck:debian-bullseye
+  only: 
+    - main
+    - master
+    - tags
+#  when: on_success
+  before_script:
+    - ansible --version
+  script:
+    - ansible-galaxy role import ${GITHUB_GROUP} ${GITHUB_REPO} --token ${GALAXY_API_TOKEN}
