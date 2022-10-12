@@ -3,7 +3,8 @@ variables:
   GITHUB_GROUP: enix
   ANSIBLE_INVENTORY: "tests/inventory"
   PYTHONUNBUFFERED: "1"
-  ANSIBLE_FORCE_COLOR: "true"
+  ANSIBLE_FORCE_COLOR: "1"
+  PY_COLORS: '1'
 
 .ansible_test_template: &ansible_test
   script:
@@ -30,25 +31,54 @@ variables:
 # images It provide a wide variety of OS container images to test with.
 # most frequent ones included here
 
-# debian-jessie:
-#   image: ansiblecheck/ansiblecheck:debian-jessie
+# debian-stretch:
+#   image: ansiblecheck/ansiblecheck:debian-stretch
 #   <<: *ansible_test
 
-debian-stretch:
-  image: ansiblecheck/ansiblecheck:debian-stretch
-  <<: *ansible_test
-
-debian-buster:
-  image: registry.gitlab.com/lcaflc/ansiblecheck:debian-buster
-  <<: *ansible_test
-
-debian-bullseye:
-  image: registry.gitlab.com/lcaflc/ansiblecheck:debian-bullseye
-  <<: *ansible_test
-
-# ubuntu-xenial:
-#   image: ansiblecheck/ansiblecheck:ubuntu-xenial
+# debian-buster:
+#   image: registry.gitlab.com/lcaflc/ansiblecheck:debian-buster
 #   <<: *ansible_test
+
+# debian-bullseye:
+#   image: registry.gitlab.com/lcaflc/ansiblecheck:debian-bullseye
+#   <<: *ansible_test
+
+# ubuntu-focal:
+#   image: registry.gitlab.com/lcaflc/ansiblecheck:ubuntu-focal
+#   <<: *ansible_test
+
+# ubuntu-jammy:
+#   image: registry.gitlab.com/lcaflc/ansiblecheck:ubuntu-jammy
+#   <<: *ansible_test
+
+test:
+  services:
+    - docker:dind
+  variables:
+      DOCKER_BUILDKIT: 1
+      DOCKER_HOST: tcp://docker:2376
+      DOCKER_TLS_CERTDIR: "/certs"
+      DOCKER_TLS_VERIFY: 1
+      DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
+      DOCKER_DRIVER: overlay2
+
+  image: docker:stable-dind
+  before_script:
+    - apk add --no-cache
+      python3 python3-dev py3-pip gcc git curl build-base
+      autoconf automake py3-cryptography linux-headers
+      musl-dev libffi-dev openssl-dev openssh rsync
+    - docker info
+    - python3 --version
+    - python3 -m pip install ansible molecule[docker]
+    - ansible --version
+    - molecule --version  
+
+  script:
+    # - molecule test
+    - molecule converge
+  tags:
+    - docker-dind
 
 importgalaxy:
   stage: deploy
