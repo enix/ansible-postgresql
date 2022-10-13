@@ -6,52 +6,8 @@ variables:
   ANSIBLE_FORCE_COLOR: "1"
   PY_COLORS: '1'
 
-.ansible_test_template: &ansible_test
-  script:
-    - ansible --version
-# Run linters. Does not fail if no errors reported
-    - ansible-lint --force-color . || true
-    - yamllint -f colored . || true
-# Uncomment if your role have depends
-#    - ansible-galaxy install -v -r requirements.yml
-    - ansible-playbook tests/test.yml --syntax-check
-    - ansible-playbook -vvv --connection=local tests/test.yml
-    # - idempotence=$(mktemp)
-    # - ansible-playbook -vvv --connection=local tests/test.yml | tee ${idempotence}
-    # - >
-    #   tail ${idempotence}
-    #   | grep -q 'changed=0.*failed=0'
-    #   && (echo 'Idempotence test: pass' && exit 0)
-    #   || (echo 'Idempotence test: fail' && exit 1)
-# This part is used to check role run.
-# Add your own tests depending on your $ROLE
-    # - echo "=======> Starting output tests"
-
-# We build using (ansiblecheck)[https://hub.docker.com/r/ansiblecheck/ansiblecheck/]
-# images It provide a wide variety of OS container images to test with.
-# most frequent ones included here
-
-# debian-stretch:
-#   image: ansiblecheck/ansiblecheck:debian-stretch
-#   <<: *ansible_test
-
-# debian-buster:
-#   image: registry.gitlab.com/lcaflc/ansiblecheck:debian-buster
-#   <<: *ansible_test
-
-# debian-bullseye:
-#   image: registry.gitlab.com/lcaflc/ansiblecheck:debian-bullseye
-#   <<: *ansible_test
-
-# ubuntu-focal:
-#   image: registry.gitlab.com/lcaflc/ansiblecheck:ubuntu-focal
-#   <<: *ansible_test
-
-# ubuntu-jammy:
-#   image: registry.gitlab.com/lcaflc/ansiblecheck:ubuntu-jammy
-#   <<: *ansible_test
-
-test:
+molecule:
+  stage: test
   services:
     - docker:dind
   variables:
@@ -75,8 +31,7 @@ test:
     - molecule --version  
 
   script:
-    # - molecule test
-    - molecule converge
+    - molecule test
   tags:
     - docker-dind
 
