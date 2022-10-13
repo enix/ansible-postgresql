@@ -1,7 +1,6 @@
 variables:
   GITHUB_REPO: $CI_PROJECT_NAME
   GITHUB_GROUP: enix
-  ANSIBLE_INVENTORY: "tests/inventory"
   PYTHONUNBUFFERED: "1"
   ANSIBLE_FORCE_COLOR: "1"
   PY_COLORS: '1'
@@ -24,10 +23,12 @@ molecule:
       python3 python3-dev py3-pip gcc git curl build-base
       autoconf automake py3-cryptography linux-headers
       musl-dev libffi-dev openssl-dev openssh rsync
+    - python3 -m pip install ansible molecule[docker] ansible-lint yamllint
     - docker info
     - python3 --version
-    - python3 -m pip install ansible molecule[docker]
     - ansible --version
+    - ansible-lint --version
+    - yamllint --version
     - molecule --version  
 
   script:
