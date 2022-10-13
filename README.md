@@ -11,6 +11,8 @@ Supported targets:
 - Debian 9 "Stretch"
 - Debian 10 "Buster"
 - Debian 11 "Bullseye"
+- Ubuntu 20.04 "Focal"
+- Ubuntu 22.04 "Jammy"
 
 Role Variables
 --------------
