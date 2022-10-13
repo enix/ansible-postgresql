@@ -3,7 +3,6 @@ enix.postgresql
 
 A role for deploying and configuring [postgresql](http://www.postgresql.org) upstream release on unix hosts using [Ansible](http://www.ansible.com/).
 
-
 Requirements
 ------------
 
@@ -12,7 +11,6 @@ Supported targets:
 - Debian 9 "Stretch"
 - Debian 10 "Buster"
 - Debian 11 "Bullseye"
-
 
 Role Variables
 --------------
@@ -82,18 +80,24 @@ Usage
 
 Use Ansible galaxy requirements.yml
 
+```yaml
     - src: enix.postgresql
+```
 
 And add it to your play's roles:
 
+```yaml
     - hosts: all
       roles:
         - role enix.postgresql:
             postgresql__var: true
+```
 
 You can also use the role as a playbook. You will be asked which hosts to provision, and you can further configure the play by using `--extra-vars`.
 
-    $ ansible-playbook -i inventory --extra-vars='{...}' main.yml
+```bash
+ansible-playbook -i inventory --extra-vars='{...}' main.yml
+```
 
 Still to do
 -----------
@@ -101,9 +105,17 @@ Still to do
 - Check if we are deploying on a replica. In this case do no createdb, createuser
 - Add CI tests using molecule
 
-
 Changelog
 ---------
+
+### 2.0.0
+
+Add support for postgresl 13 and 14.
+Add Debian 10 Buster and Debian 11 Bullseye support.
+Add Ubuntu 20.04 Focal and Ubuntu 22.04 Jammy support.
+Remove debian jessie support.
+Switch to molecule tests.
+Use new ansible FQDN tasks
 
 ### 1.2.0
 
@@ -125,4 +137,4 @@ GPLv2
 Author Information
 ------------------
 
-Laurent CORBES <laurent.corbes@enix.fr> - http://www.enix.io
+Laurent CORBES <laurent.corbes@enix.fr> - <http://www.enix.io>
