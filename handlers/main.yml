@@ -1,10 +1,14 @@
 ---
 # handlers file for postgresql
 
-- name: restart postgresql
-  service: name=postgresql state=restarted
+- name: Restart postgresql
+  ansible.builtin.service:
+    name: postgresql
+    state: restarted
   # when: ansible_virtualization_type != "docker"
 
-- name: reload postgresql
-  service: name=postgresql state=reloaded
+- name: Reload postgresql
+  ansible.builtin.service:
+    name: postgresql
+    state: reloaded
   # when: ansible_virtualization_type != "docker"

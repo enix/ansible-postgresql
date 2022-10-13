@@ -1,37 +1,37 @@
 ---
 
 - name: "Debian: Add postgresql.org repository GPG key"
-  apt_key:
+  ansible.builtin.apt_key:
     url: "{{ postgresql__gpg_url }}"
 
 - name: "Debian: Configure postgresql.org apt repository"
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "{{ postgresql__apt_repo }}"
     state: present
     update_cache: yes
 
 - name: "Debian: Install postgresql package"
-  apt:
+  ansible.builtin.apt:
     name: "postgresql-{{ postgresql__version }}"
     state: present
   notify:
-    - restart postgresql
+    - Restart postgresql
 
 - name: "Debian: Install python-psycopg2"
-  apt:
+  ansible.builtin.apt:
     name: "python-psycopg2"
     state: present
   when: ansible_python.version.major == 2
 
 - name: "Debian: Install python3-psycopg2"
-  apt:
+  ansible.builtin.apt:
     name: "python3-psycopg2"
     state: present
   when: ansible_python.version.major == 3
 
 - name: "Debian: Install postgresql extensions"
-  apt:
+  ansible.builtin.apt:
     name: "postgresql-{{ postgresql__version }}-{{ item }}"
     state: present
-  notify: restart postgresql
+  notify: Restart postgresql
   with_items: "{{ postgresql__extensions }}"

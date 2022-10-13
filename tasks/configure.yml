@@ -1,7 +1,7 @@
 ---
 
 - name: Configure global settings
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "{{ postgresql__config_path }}/postgresql.conf"
     backrefs: yes
     regexp: "^#?{{ item.option }}.+$"
@@ -9,20 +9,20 @@
     state: "{{ item.state | default('present') }}"
     backup: yes
   with_items: "{{ postgresql__global_config_options }}"
-  notify: restart postgresql
+  notify: Restart postgresql
 
 - name: Check include configuration
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "{{ postgresql__config_path }}/postgresql.conf"
     regexp: "^#?include_dir.+$"
     line: "include_dir = 'conf.d'"
     state: present
     backup: yes
   when: postgresql__includeconf is defined
-  notify: restart postgresql
+  notify: Restart postgresql
 
 - name: Check include path exists
-  file:
+  ansible.builtin.file:
     dest: "{{ postgresql__config_path }}/conf.d"
     state: directory
     owner: "{{ postgresql__user }}"
@@ -31,7 +31,7 @@
   when: postgresql__includeconf is defined
 
 - name: Template include configuration
-  template:
+  ansible.builtin.template:
     src: "{{ item }}"
     dest: "{{ postgresql__config_path }}/conf.d/{{ item | basename | regex_replace('.j2','') }}"
     backup: yes
@@ -40,16 +40,16 @@
     mode: 0644
   with_items: "{{ postgresql__includeconf }}"
   when: postgresql__includeconf is defined
-  notify: restart postgresql
+  notify: Restart postgresql
 
 
 - name: Configure host based authentication (if entries are configured).
-  template:
+  ansible.builtin.template:
     src: "pg_hba.conf.j2"
     dest: "{{ postgresql__config_path }}/pg_hba.conf"
     backup: yes
     owner: "{{ postgresql__user }}"
     group: "{{ postgresql__group }}"
     mode: 0600
-  notify: restart postgresql
+  notify: Restart postgresql
   when: postgresql__hba_entries is defined
