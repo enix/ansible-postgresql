@@ -10,7 +10,7 @@ galaxy_info:
 
   license: license GPLv2
 
-  min_ansible_version: 2.4
+  min_ansible_version: 3.0
 
   platforms:
   #- name: Fedora
@@ -21,15 +21,12 @@ galaxy_info:
   #  versions:
   #  - all
   #  - any
-  #- name: Ubuntu
-  #  versions:
-  #  - all
-  #  - xenial
-  #  - bionic
+  - name: Ubuntu
+    versions:
+    - focal
+    - jammy
   - name: Debian
     versions:
-  #  - all
-  #  - sid
     - stretch
     - buster
     - bullseye
