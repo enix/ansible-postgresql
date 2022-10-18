@@ -24,7 +24,7 @@
     name: postgresql
     state: started
     enabled: true
-  # when: ansible_virtualization_type != "docker"
+  when: not postgresql__disable_initdb
 
 
 - name: "Create users"
