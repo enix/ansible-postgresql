@@ -8,3 +8,6 @@ postgresql__global_config_options: []
 # postgresql__hba_entries:
 postgresql__databases: []
 postgresql__users: []
+
+postgresql__install_pgbackrest: false
+postgresql__install_pg_auto_failover: false

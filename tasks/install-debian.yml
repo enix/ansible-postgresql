@@ -35,3 +35,15 @@
     state: present
   notify: Restart postgresql
   with_items: "{{ postgresql__extensions }}"
+
+- name: "Debian: Install pgbackrest"
+  ansible.builtin.apt:
+    name: "pgbackrest"
+    state: present
+  when: postgresql__install_pgbackrest
+
+- name: "Debian: Install pg_auto_failover"
+  ansible.builtin.apt:
+    name: [ "pg-auto-failover-cli", "postgresql-14-auto-failover" ]
+    state: present
+  when: postgresql__install_pg_auto_failover
