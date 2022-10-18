@@ -74,6 +74,7 @@ postgresql__databases:
 
 - `postgresql__install_pgbackrest` - install pgbackrest software <https://pgbackrest.org>.
 - `postgresql__install_pg_auto_failover` - install pg_auto_failover software <https://github.com/citusdata/pg_auto_failover>.
+- `postgresql__disable_initdb` - disable creation of the default main cluster. Usefull in case of pg_auto_failover cluster creation, or just package installation.
 
 Dependencies
 ------------
@@ -116,6 +117,7 @@ Changelog
 ### 2.1.0
 
 Add installation of pgbackrest and pg_auto_failover software.
+Add disable_initdb option. This prevent installation to setup default main postgresql clusterdb.
 ### 2.0.0
 
 Add support for postgresl 13 and 14.

@@ -10,6 +10,20 @@
     state: present
     update_cache: yes
 
+- name: "Debian: Install postgresql-common"
+  ansible.builtin.apt:
+    name: "postgresql-common"
+    state: present
+
+- name: Disable initdb
+  ansible.builtin.lineinfile:
+    path: /etc/postgresql-common/createcluster.conf
+    regexp: "^create_main_cluster ="
+    line: create_main_cluster = false
+    insertafter: "^#create_main_cluster ="
+    state: present
+  when: postgresql__disable_initdb
+
 - name: "Debian: Install postgresql package"
   ansible.builtin.apt:
     name: "postgresql-{{ postgresql__version }}"

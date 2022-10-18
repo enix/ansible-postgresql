@@ -11,3 +11,4 @@ postgresql__users: []
 
 postgresql__install_pgbackrest: false
 postgresql__install_pg_auto_failover: false
+postgresql__disable_initdb: false
