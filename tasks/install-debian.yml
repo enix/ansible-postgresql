@@ -58,6 +58,6 @@
 
 - name: "Debian: Install pg_auto_failover"
   ansible.builtin.apt:
-    name: [ "pg-auto-failover-cli", "postgresql-14-auto-failover" ]
+    name: [ "pg-auto-failover-cli", "postgresql-{{ postgresql__version }}-auto-failover" ]
     state: present
   when: postgresql__install_pg_auto_failover
