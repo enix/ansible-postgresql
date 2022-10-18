@@ -33,7 +33,7 @@
 - name: Template include configuration
   ansible.builtin.template:
     src: "{{ item }}"
-    dest: "{{ postgresql__config_path }}/conf.d/{{ item | basename | regex_replace('.j2','') }}"
+    dest: "{{ postgresql__config_path }}/conf.d/{{ item | basename | regex_replace('.j2', '') }}"
     backup: yes
     owner: "{{ postgresql__user }}"
     group: "{{ postgresql__group }}"

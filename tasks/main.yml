@@ -6,7 +6,9 @@
   when: ( postgresql__version < 10 ) or ( postgresql__version > 14 )
 
 - name: Ensure all configured locales are present.
-  locale_gen: "name={{ item }} state=present"
+  community.general.locale_gen: 
+    name: "{{ item }}"
+    state: present
   with_items: "{{ postgresql__locales }}"
   register: locale_gen_result
 

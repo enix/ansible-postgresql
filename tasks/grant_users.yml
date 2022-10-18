@@ -1,7 +1,7 @@
 ---
 
 - name: Ensure PostgreSQL users GRANT are present
-  postgresql_user:
+  community.postgresql.postgresql_user:
     name: "{{ item.name }}"
     conn_limit: "{{ item.conn_limit | default(omit) }}"
     priv: "{{ item.priv | default(omit) }}"
