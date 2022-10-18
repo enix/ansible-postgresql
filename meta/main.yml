@@ -10,7 +10,7 @@ galaxy_info:
 
   license: license GPLv2
 
-  min_ansible_version: 3.0
+  min_ansible_version: "3.0"
 
   platforms:
   #- name: Fedora

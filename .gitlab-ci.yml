@@ -32,7 +32,7 @@ molecule:
     - molecule --version  
 
   script:
-    - molecule test
+    - molecule test --all -- -vv
   tags:
     - docker-dind
 

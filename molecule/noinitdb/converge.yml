@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: all
+
+  roles:
+    - role: "enix.postgresql"
+      postgresql__version: 14
+      postgresql__install_pgbackrest: true
+      postgresql__install_pg_auto_failover: true
+      postgresql__disable_initdb: true
